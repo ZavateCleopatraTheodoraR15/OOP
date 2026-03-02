@@ -1,0 +1,241 @@
+//main//
+#include <iostream>
+#include "Student.h"
+#include "NumberList.h"
+#include "ComparaStudenti.h"
+#include "Student.h"
+
+using namespace std;
+
+int main()
+{
+    Student s1, s2;
+
+    s1.SetName("Andrei");
+    s1.SetNotaMate(9);
+    s1.SetNotaEngleza(8);
+    s1.SetNotaIstorie(7);
+
+    s2.SetName("Maria");
+    s2.SetNotaMate(7);
+    s2.SetNotaEngleza(9);
+    s2.SetNotaIstorie(8);
+
+    cout << "Medie Andrei: " << s1.GetMedie() << endl;
+    cout << "Medie Maria: " << s2.GetMedie() << endl;
+
+    cout << "Comparare nume: " << ComparaNume(s1, s2) << endl;
+    cout << "Comparare mate: " << ComparaMate(s1, s2) << endl;
+    cout << "Comparare engleza: " << ComparaEngleza(s1, s2) << endl;
+    cout << "Comparare istorie: " << ComparaIstorie(s1, s2) << endl;
+    cout << "Comparare medie: " << ComparaMedie(s1, s2) << endl;
+
+    return 0;
+}
+
+//Student.cpp//
+
+#include "Student.h"
+#include<iostream>
+using namespace std;
+void Student::SetName(const string& n)
+{
+	name = n;
+}
+string Student::GetName() const
+{
+	return name;
+}
+
+bool Student::SetNotaMate(float grade)
+{
+    if (grade < 1 || grade > 10)
+        return false;
+    Nota_Mate = grade;
+    return true;
+}
+float Student::GetNotaMate() const
+{
+    return Nota_Mate;
+}
+
+bool Student::SetNotaEngleza(float grade)
+{
+    if (grade < 1 || grade > 10)
+        return false;
+    Nota_Engleza = grade;
+    return true;
+}
+float Student::GetNotaEngleza() const
+{
+    return Nota_Engleza;
+}
+
+bool Student::SetNotaIstorie(float grade)
+{
+    if (grade < 1 || grade > 10)
+        return false;
+    Nota_Istorie = grade;
+    return true;
+}
+float Student::GetNotaIstorie() const
+{
+    return Nota_Istorie;
+}
+
+float Student::GetMedie() const
+{
+    return (Nota_Mate + Nota_Engleza + Nota_Istorie) / 3;
+}
+
+//Student.h//
+
+#pragma once
+#include<string>
+using namespace std;
+
+class Student
+{
+private:
+
+	string name;
+	float Nota_Mate;
+	float Nota_Engleza;
+	float Nota_Istorie;
+
+public:
+
+	void SetName(const string& n);
+	string GetName() const;
+
+	bool SetNotaMate(float grade);
+	float GetNotaMate() const;
+
+	bool SetNotaEngleza(float grade);
+	float GetNotaEngleza() const;
+
+	bool SetNotaIstorie(float grade);
+	float GetNotaIstorie() const;
+
+	float GetMedie() const;
+
+};
+
+//ComparaStudenti.cpp//
+
+#include "Student.h"
+
+int ComparaNume(const Student& s1, const Student& s2)
+{
+    if (s1.GetName() == s2.GetName())
+        return 0;
+
+    if (s1.GetName() > s2.GetName())
+        return 1;
+
+    return -1;
+}
+
+int ComparaMate(const Student& s1, const Student& s2)
+{
+    if (s1.GetNotaMate() == s2.GetNotaMate())
+        return 0;
+
+    if (s1.GetNotaMate() > s2.GetNotaMate())
+        return 1;
+
+    return -1;
+}
+
+int ComparaEngleza(const Student& s1, const Student& s2)
+{
+    if (s1.GetNotaEngleza() == s2.GetNotaEngleza())
+        return 0;
+
+    if (s1.GetNotaEngleza() > s2.GetNotaEngleza())
+        return 1;
+
+    return -1;
+}
+
+int ComparaIstorie(const Student& s1, const Student& s2)
+{
+    if (s1.GetNotaIstorie() == s2.GetNotaIstorie())
+        return 0;
+
+    if (s1.GetNotaIstorie() > s2.GetNotaIstorie())
+        return 1;
+
+    return -1;
+}
+
+int ComparaMedie(const Student& s1, const Student& s2)
+{
+    if (s1.GetMedie() == s2.GetMedie())
+        return 0;
+
+    if (s1.GetMedie() > s2.GetMedie())
+        return 1;
+
+    return -1;
+}
+
+//ComparaStudenti.h//
+
+#include "Student.h"
+
+int ComparaNume(const Student& s1, const Student& s2);
+int ComparaMate(const Student& s1, const Student& s2);
+int ComparaEngleza(const Student& s1, const Student& s2);
+int ComparaIstorie(const Student& s1, const Student& s2);
+int ComparaMedie(const Student& s1, const Student& s2);
+
+//NumberList.cpp//
+
+#include"NumberList.h"
+#include<iostream>
+using namespace std;
+void NumberList::Init()
+{
+	this->count = 0;
+};
+bool NumberList::Add(int x)
+{
+	if (this->count >= 10) return false;
+	this->numbers[this->count] = x;
+	this->count++;
+	return true;
+}
+void NumberList::Sort()
+{
+	for (int i = 0; i < this->count-1; i++)
+		for (int j = i + 1; j < this->count; j++)
+			if (this->numbers[i] > this->numbers[j])
+			{
+				int aux = this->numbers[i];
+				this->numbers[i] = this->numbers[j];
+				this->numbers[j] = aux;
+			}
+}
+void NumberList::Print()
+{
+	for (int i = 0; i <this->count; i++)
+	{
+		printf("%d ", this->numbers[i]);
+	}
+}
+
+//NumberList.h//
+
+#pragma once
+class NumberList
+{
+    int numbers[10];
+    int count;
+public:
+    void Init();          // count will be 0
+    bool Add(int x);      // adds X to the numbers list and increase the data member count.
+    // if count is bigger or equal to 10, the function will return false
+    void Sort();          // will sort the numbers vector
+    void Print();         // will print the current vector
+};
