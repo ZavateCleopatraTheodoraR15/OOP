@@ -1,0 +1,33 @@
+#include <iostream>
+#include "Student.h"
+#include "NumberList.h"
+#include "ComparaStudenti.h"
+#include "Student.h"
+
+using namespace std;
+
+int main()
+{
+    Student s1, s2;
+
+    s1.SetName("Andrei");
+    s1.SetNotaMate(9);
+    s1.SetNotaEngleza(8);
+    s1.SetNotaIstorie(7);
+
+    s2.SetName("Maria");
+    s2.SetNotaMate(7);
+    s2.SetNotaEngleza(9);
+    s2.SetNotaIstorie(8);
+
+    cout << "Medie Andrei: " << s1.GetMedie() << endl;
+    cout << "Medie Maria: " << s2.GetMedie() << endl;
+
+    cout << "Comparare nume: " << ComparaNume(s1, s2) << endl;
+    cout << "Comparare mate: " << ComparaMate(s1, s2) << endl;
+    cout << "Comparare engleza: " << ComparaEngleza(s1, s2) << endl;
+    cout << "Comparare istorie: " << ComparaIstorie(s1, s2) << endl;
+    cout << "Comparare medie: " << ComparaMedie(s1, s2) << endl;
+
+    return 0;
+}
