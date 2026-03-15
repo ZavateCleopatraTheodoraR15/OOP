@@ -1,0 +1,28 @@
+#include <iostream>
+#include "Sort.h"
+using namespace std;
+
+int main()
+{
+    Sort s1(5, 1, 100);
+    s1.BubbleSort(true);
+    s1.Print();
+
+    int v[] = { 10, 40, 100, 5, 70 };
+    Sort s2(v, 5);
+    s2.InsertSort(true);
+    s2.Print();
+
+    Sort s3(5, 8, 3, 9, 1, 4);
+    s3.QuickSort(true);
+    s3.Print();
+
+    Sort s4("10,40,100,5,70");
+    s4.InsertSort(true);
+    s4.Print();
+
+    cout << s4.GetElementsCount() << endl;
+    cout << s4.GetElementFromIndex(2) << endl;
+
+    return 0;
+}
